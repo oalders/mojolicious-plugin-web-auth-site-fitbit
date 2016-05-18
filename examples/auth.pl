@@ -37,13 +37,13 @@ my $pit = pit_get(
     }
 );
 
-
 plugin 'Mojolicious::Plugin::Web::Auth',
-    module        => ucfirst($site),
-    key           => $pit->{key},
-    secret        => encode_base64(sprintf('%s:%s', $pit->{key}, $pit->{secret})),
-    scope => 'activity heartrate location nutrition profile sleep social weight',
-    on_finished   => sub {
+    module => ucfirst($site),
+    key    => $pit->{key},
+    secret => encode_base64( $pit->{key} . ':' . $pit->{secret}, q{} ),
+    scope =>
+    'activity heartrate location nutrition profile sleep social weight',
+    on_finished => sub {
     my ( $c, $access_token, $account_info ) = @_;
     $c->session( 'access_token' => $access_token );
     $c->session( 'account_info' => $account_info );

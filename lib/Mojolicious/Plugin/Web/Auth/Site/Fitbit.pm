@@ -23,25 +23,31 @@ __END__
 
 =head1 SYNOPSIS
 
+    use MIME::Base64;
     # Mojolicious
-    $self->plugin('Web::Auth',
-        module      => 'Fitbit',
-        key         => 'Fitbit consumer key',
-        secret      => 'Fitbit consumer secret',
+    $self->plugin(
+        'Web::Auth',
+        module => 'Fitbit',
+        key    => 'Fitbit consumer key',
+        secret => encode_base64( $client_id . ':' . $client_secret, q{} ),
+        scope =>
+            'activity heartrate location nutrition profile sleep social weight',
         on_finished => sub {
             my ( $c, $access_token, $access_secret ) = @_;
-            ...
+            ...;
         },
     );
 
     # Mojolicious::Lite
     plugin 'Web::Auth',
-        module      => 'Fitbit',
-        key         => 'Fitbit consumer key',
-        secret      => 'Fitbit consumer secret',
+        module => 'Fitbit',
+        key    => 'Fitbit consumer key',
+        secret => encode_base64( $client_id . ':' . $client_secret, q{} ),
+        scope =>
+        'activity heartrate location nutrition profile sleep social weight',
         on_finished => sub {
-            my ( $c, $access_token, $access_secret ) = @_;
-            ...
+        my ( $c, $access_token, $access_secret ) = @_;
+        ...;
         };
 
 
