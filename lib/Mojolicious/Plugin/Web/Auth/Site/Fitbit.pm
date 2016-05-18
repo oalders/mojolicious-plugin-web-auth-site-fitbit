@@ -9,8 +9,7 @@ has access_token_url => 'https://api.fitbit.com/oauth2/token';
 has authorize_header => 'Basic';
 has authorize_url    => 'https://www.fitbit.com/oauth2/authorize';
 has response_type    => 'code';
-has user_info        => 1;
-has user_info_url    => 'https://api.fitbit.com/1/user/-/profile.json';
+has user_info        => 0;
 
 sub moniker { 'fitbit' }
 
@@ -23,7 +22,8 @@ __END__
 
 =head1 SYNOPSIS
 
-    use MIME::Base64;
+    use MIME::Base64 qw( encode_base64);
+
     # Mojolicious
     $self->plugin(
         'Web::Auth',
