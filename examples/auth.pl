@@ -19,8 +19,9 @@ L<Mojolicious::Plugin::Web::Auth>.
 use FindBin;
 BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
 
-use Mojolicious::Lite;
 use Config::Pit;
+use MIME::Base64;
+use Mojolicious::Lite;
 
 print STDERR
     "[NOTICE] should be used in domains other than 'localhost' (e.g. local.example.com)\n";
@@ -36,11 +37,12 @@ my $pit = pit_get(
     }
 );
 
+
 plugin 'Mojolicious::Plugin::Web::Auth',
     module        => ucfirst($site),
     key           => $pit->{key},
-    secret        => $pit->{secret},
-    authorize_url => 'https://www.fitbit.com/oauth2/authorize?scope=social',
+    secret        => encode_base64(sprintf('%s:%s', $pit->{key}, $pit->{secret})),
+    scope => 'activity heartrate location nutrition profile sleep social weight',
     on_finished   => sub {
     my ( $c, $access_token, $account_info ) = @_;
     $c->session( 'access_token' => $access_token );
