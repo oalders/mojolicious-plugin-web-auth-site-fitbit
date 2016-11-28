@@ -36,7 +36,7 @@ version 0.000001
         module           => 'Fitbit',
         authorize_url    => $authorize_url,
         access_token_url => $access_token_url,
-        key              => 'Fitbit consumer key',
+        key              => $key,
         scope =>
             'activity heartrate location nutrition profile sleep social weight',
         on_finished => sub {
@@ -50,7 +50,7 @@ version 0.000001
         module           => 'Fitbit',
         authorize_url    => $authorize_url,
         access_token_url => $access_token_url,
-        key              => 'Fitbit consumer key',
+        key              => $key,
         scope =>
         'activity heartrate location nutrition profile sleep social weight',
         on_finished => sub {
