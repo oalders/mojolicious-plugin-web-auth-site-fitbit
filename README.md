@@ -1,23 +1,14 @@
-use strict;
-use warnings;
+# NAME
 
-package Mojolicious::Plugin::Web::Auth::Site::Fitbit;
+Mojolicious::Plugin::Web::Auth::Site::Fitbit - Fitbit OAuth Plugin for Mojolicious::Plugin::Web::Auth
 
-use Mojo::Base qw/Mojolicious::Plugin::Web::Auth::OAuth2/;
+[![Build Status](https://travis-ci.org/oalders/mojolicious-plugin-web-auth-site-fitbit.png?branch=master)](https://travis-ci.org/oalders/mojolicious-plugin-web-auth-site-fitbit)
 
-has response_type => 'code';
-has user_info     => 0;
+# VERSION
 
-sub moniker { 'fitbit' }
+version 0.000001
 
-1;
-__END__
-
-# ABSTRACT: Fitbit OAuth Plugin for Mojolicious::Plugin::Web::Auth
-
-=pod
-
-=head1 SYNOPSIS
+# SYNOPSIS
 
     use URI::FromHash qw( uri );
     my $key = 'foo';
@@ -70,9 +61,18 @@ __END__
     # default authentication endpoint: /auth/fitbit/authenticate
     # default callback endpoint: /auth/fitbit/callback
 
-=head1 DESCRIPTION
+# DESCRIPTION
 
-This module adds L<Fitbit|https://dev.fitbit.com/docs/> support to
-L<Mojolicious::Plugin::Web::Auth>.
+This module adds [Fitbit](https://dev.fitbit.com/docs/) support to
+[Mojolicious::Plugin::Web::Auth](https://metacpan.org/pod/Mojolicious::Plugin::Web::Auth).
 
-=cut
+# AUTHOR
+
+Olaf Alders <olaf@wundercounter.com>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2016 by Olaf Alders.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
