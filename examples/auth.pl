@@ -22,6 +22,7 @@ BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
 use Config::Pit;
 use MIME::Base64;
 use Mojolicious::Lite;
+use URI::FromHash qw( uri );
 
 print STDERR
     "[NOTICE] should be used in domains other than 'localhost' (e.g. local.example.com)\n";
@@ -37,10 +38,27 @@ my $pit = pit_get(
     }
 );
 
+my $access_token_url = uri(
+    scheme   => 'https',
+    username => $pit->{key},
+    password => $pit->{secret},
+    host     => 'api.fitbit.com',
+    path     => 'oauth2/token',
+);
+
+my $authorize_url = uri(
+    scheme   => 'https',
+    username => $pit->{key},
+    password => $pit->{secret},
+    host     => 'www.fitbit.com',
+    path     => 'oauth2/authorize',
+);
+
 plugin 'Mojolicious::Plugin::Web::Auth',
-    module => ucfirst($site),
-    key    => $pit->{key},
-    secret => encode_base64( $pit->{key} . ':' . $pit->{secret}, q{} ),
+    authorize_url    => $authorize_url,
+    access_token_url => $access_token_url,
+    module           => ucfirst($site),
+    key              => $pit->{key},
     scope =>
     'activity heartrate location nutrition profile sleep social weight',
     on_finished => sub {

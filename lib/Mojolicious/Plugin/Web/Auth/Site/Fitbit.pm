@@ -5,9 +5,6 @@ package Mojolicious::Plugin::Web::Auth::Site::Fitbit;
 
 use Mojo::Base qw/Mojolicious::Plugin::Web::Auth::OAuth2/;
 
-has access_token_url => 'https://api.fitbit.com/oauth2/token';
-has authorize_header => 'Basic';
-has authorize_url    => 'https://www.fitbit.com/oauth2/authorize';
 has response_type    => 'code';
 has user_info        => 0;
 
@@ -22,14 +19,31 @@ __END__
 
 =head1 SYNOPSIS
 
-    use MIME::Base64 qw( encode_base64);
+    use URI::FromHash qw( uri );
+
+    my $access_token_url = uri(
+        scheme   => 'https',
+        username => $key,
+        password => $secret,
+        host     => 'api.fitbit.com',
+        path     => 'oauth2/token',
+    );
+
+    my $authorize_url = uri(
+        scheme   => 'https',
+        username => $key,
+        password => $secret,
+        host     => 'www.fitbit.com',
+        path     => 'oauth2/authorize',
+    );
 
     # Mojolicious
     $self->plugin(
         'Web::Auth',
-        module => 'Fitbit',
-        key    => 'Fitbit consumer key',
-        secret => encode_base64( $client_id . ':' . $client_secret, q{} ),
+        module           => 'Fitbit',
+        authorize_url    => $authorize_url,
+        access_token_url => $access_token_url,
+        key              => 'Fitbit consumer key',
         scope =>
             'activity heartrate location nutrition profile sleep social weight',
         on_finished => sub {
@@ -40,16 +54,16 @@ __END__
 
     # Mojolicious::Lite
     plugin 'Web::Auth',
-        module => 'Fitbit',
-        key    => 'Fitbit consumer key',
-        secret => encode_base64( $client_id . ':' . $client_secret, q{} ),
+        module           => 'Fitbit',
+        authorize_url    => $authorize_url,
+        access_token_url => $access_token_url,
+        key              => 'Fitbit consumer key',
         scope =>
         'activity heartrate location nutrition profile sleep social weight',
         on_finished => sub {
         my ( $c, $access_token, $access_secret ) = @_;
         ...;
         };
-
 
     # default authentication endpoint: /auth/fitbit/authenticate
     # default callback endpoint: /auth/fitbit/callback
