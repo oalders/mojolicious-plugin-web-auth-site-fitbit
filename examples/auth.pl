@@ -70,7 +70,9 @@ plugin 'Mojolicious::Plugin::Web::Auth',
 
 get '/' => sub {
     my ($c) = @_;
-    unless ( $c->session('account_info') ) {
+    unless ( $c->session('access_token') ) {
+        use DDP;
+        p $c->session;
         return $c->redirect_to('login');
     }
 } => 'index';
@@ -95,9 +97,9 @@ __DATA__
 
 @@ index.html.ep
 % layout 'default';
-Hello <%= session('account_info')->{data}->{username} %>@<%= site %>
+<%= site %> access token: <%= session('access_token') %>
 <form method="post" action="/logout">
-<button type="submit">Logout</button>
+<button type="submit">Log out</button>
 </form>
 
 @@ login.html.ep
