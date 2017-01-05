@@ -4,7 +4,7 @@
       "Olaf Alders <olaf@wundercounter.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 6.007, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "Dist::Zilla version 6.008, CPAN::Meta::Converter version 2.150005",
    "license" : [
       "perl_5"
    ],
@@ -30,7 +30,7 @@
       "develop" : {
          "requires" : {
             "Test::CPAN::Changes" : "0.19",
-            "Test::Code::TidyAll" : "0.24",
+            "Test::Code::TidyAll" : "0.50",
             "Test::More" : "0.88",
             "Test::Spelling" : "0.12"
          }
@@ -67,6 +67,6 @@
    "x_contributors" : [
       "Olaf Alders <olaf@wundersolutions.com>"
    ],
-   "x_serialization_backend" : "Cpanel::JSON::XS version 3.0217"
+   "x_serialization_backend" : "Cpanel::JSON::XS version 3.0225"
 }
 
