@@ -7,6 +7,7 @@ use Mojo::Base qw/Mojolicious::Plugin::Web::Auth::OAuth2/;
 
 has response_type => 'code';
 has user_info     => 0;
+#has user_info_url => 'https://api.fitbit.com/1/user/-/profile.json';
 
 sub moniker { 'fitbit' }
 
