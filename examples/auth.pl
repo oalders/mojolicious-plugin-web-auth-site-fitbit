@@ -20,6 +20,7 @@ use FindBin;
 BEGIN { unshift @INC, "$FindBin::Bin/../lib" }
 
 use Config::Pit;
+use Data::Printer;
 use MIME::Base64;
 use Mojolicious::Lite;
 use URI::FromHash qw( uri );
@@ -62,9 +63,10 @@ plugin 'Mojolicious::Plugin::Web::Auth',
     scope =>
     'activity heartrate location nutrition profile sleep social weight',
     on_finished => sub {
-    my ( $c, $access_token, $account_info ) = @_;
-    $c->session( 'access_token' => $access_token );
-    $c->session( 'account_info' => $account_info );
+    my ( $c, $access_token, $account_info, $extra ) = @_;
+    p $account_info;
+    $c->session( access_token => $access_token );
+    $c->session( extra        => $extra );
     return $c->redirect_to('index');
     };
 
@@ -97,7 +99,10 @@ __DATA__
 
 @@ index.html.ep
 % layout 'default';
+% use DDP;
 <%= site %> access token: <%= session('access_token') %>
+% my $extra = session('extra');
+extra: <pre><%= np $extra %></pre>
 <form method="post" action="/logout">
 <button type="submit">Log out</button>
 </form>
