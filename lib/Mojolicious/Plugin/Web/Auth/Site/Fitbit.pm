@@ -5,10 +5,10 @@ package Mojolicious::Plugin::Web::Auth::Site::Fitbit;
 
 use Mojo::Base qw/Mojolicious::Plugin::Web::Auth::OAuth2/;
 
-has response_type => 'code';
-has user_info     => 0;
-
-#has user_info_url => 'https://api.fitbit.com/1/user/-/profile.json';
+has authorize_header => 'Bearer ';
+has response_type    => 'code';
+has user_info        => 1;
+has user_info_url    => 'https://api.fitbit.com/1/user/-/profile.json';
 
 sub moniker { 'fitbit' }
 
