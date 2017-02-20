@@ -63,7 +63,7 @@
          "web" : "https://github.com/oalders/mojolicious-plugin-web-auth-site-fitbit"
       }
    },
-   "version" : "0.000001",
+   "version" : "0.000002",
    "x_contributors" : [
       "Olaf Alders <olaf@wundersolutions.com>"
    ],

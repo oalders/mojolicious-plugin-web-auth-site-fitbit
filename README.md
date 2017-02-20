@@ -6,7 +6,7 @@ Mojolicious::Plugin::Web::Auth::Site::Fitbit - Fitbit OAuth Plugin for Mojolicio
 
 # VERSION
 
-version 0.000001
+version 0.000002
 
 # SYNOPSIS
 
