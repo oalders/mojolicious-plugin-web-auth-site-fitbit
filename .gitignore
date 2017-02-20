@@ -1,4 +1,5 @@
+/Mojolicious-Plugin-Web-Auth-Site-Fitbit*
 .build
 local
-/Mojolicious-Plugin-Web-Auth-Site-Fitbit*
+*.swp
 .tidyall.d
